@@ -1,0 +1,70 @@
+<div class="form-container">
+  <div class="form-card">
+    <div *ngIf="isNewSeller">
+      <h2 class="form-title">Seller Signup</h2>
+      <p class="form-subtitle">Create a seller account to start listing your products</p>
+      
+      <form #sellerSignUp="ngForm" (ngSubmit)="signUp(sellerSignUp.value)" class="app-form" noValidate>
+        <div class="form-group">
+          <label for="signUpName" class="form-label">Full Name</label>
+          <input type="text" id="signUpName" placeholder="John Doe" ngModel name="name" required #signUpNameRef="ngModel" class="form-input" [class.input-error]="signUpNameRef.invalid && (signUpNameRef.dirty || signUpNameRef.touched)"/>
+          <span class="error-msg" *ngIf="signUpNameRef.invalid && (signUpNameRef.dirty || signUpNameRef.touched)">Name is required.</span>
+        </div>
+        
+        <div class="form-group">
+          <label for="signUpEmail" class="form-label">Email Address</label>
+          <input type="email" id="signUpEmail" placeholder="john@example.com" ngModel name="email" required email #signUpEmailRef="ngModel" class="form-input" [class.input-error]="signUpEmailRef.invalid && (signUpEmailRef.dirty || signUpEmailRef.touched)"/>
+          <div class="error-msg" *ngIf="signUpEmailRef.invalid && (signUpEmailRef.dirty || signUpEmailRef.touched)">
+            <span *ngIf="signUpEmailRef.errors?.['required']">Email is required.</span>
+            <span *ngIf="signUpEmailRef.errors?.['email']">Please enter a valid email address.</span>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="signUpPassword" class="form-label">Password</label>
+          <input type="password" id="signUpPassword" placeholder="••••••••" ngModel name="password" required minlength="6" #signUpPasswordRef="ngModel" class="form-input" [class.input-error]="signUpPasswordRef.invalid && (signUpPasswordRef.dirty || signUpPasswordRef.touched)"/>
+          <div class="error-msg" *ngIf="signUpPasswordRef.invalid && (signUpPasswordRef.dirty || signUpPasswordRef.touched)">
+            <span *ngIf="signUpPasswordRef.errors?.['required']">Password is required.</span>
+            <span *ngIf="signUpPasswordRef.errors?.['minlength']">Password must be at least 6 characters.</span>
+          </div>
+        </div>
+        
+        <button type="submit" [disabled]="!sellerSignUp.valid" class="btn-primary">Create Account</button>
+        
+        <div class="form-footer">
+          <span>Already have an account?</span>
+          <button type="button" class="btn-link" (click)="isNewSeller = !isNewSeller">Log In Here</button>
+        </div>
+      </form>
+    </div>
+
+    <div *ngIf="!isNewSeller">
+      <h2 class="form-title">Seller Login</h2>
+      <p class="form-subtitle">Welcome back! Sign in to manage your inventory</p>
+      
+      <form #sellerLogin="ngForm" (ngSubmit)="login(sellerLogin.value)" class="app-form" noValidate>
+        <div class="form-group">
+          <label for="loginEmail" class="form-label">Email Address</label>
+          <input type="email" id="loginEmail" placeholder="john@example.com" ngModel name="email" required email #loginEmailRef="ngModel" class="form-input" [class.input-error]="loginEmailRef.invalid && (loginEmailRef.dirty || loginEmailRef.touched)"/>
+          <div class="error-msg" *ngIf="loginEmailRef.invalid && (loginEmailRef.dirty || loginEmailRef.touched)">
+            <span *ngIf="loginEmailRef.errors?.['required']">Email is required.</span>
+            <span *ngIf="loginEmailRef.errors?.['email']">Please enter a valid email address.</span>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="loginPassword" class="form-label">Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" ngModel name="password" required #loginPasswordRef="ngModel" class="form-input" [class.input-error]="loginPasswordRef.invalid && (loginPasswordRef.dirty || loginPasswordRef.touched)"/>
+          <span class="error-msg" *ngIf="loginPasswordRef.invalid && (loginPasswordRef.dirty || loginPasswordRef.touched)">Password is required.</span>
+        </div>
+        
+        <button type="submit" [disabled]="!sellerLogin.valid" class="btn-primary">Sign In</button>
+        
+        <div class="form-footer">
+          <span>New to eCom?</span>
+          <button type="button" class="btn-link" (click)="isNewSeller = !isNewSeller">Register Here</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

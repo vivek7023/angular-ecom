@@ -1,0 +1,64 @@
+<div class="seller-dashboard-container">
+  <!-- Welcome Banner -->
+  <div class="welcome-banner">
+    <div class="banner-content">
+      <span class="hub-tag">Seller Hub</span>
+      <h1 class="welcome-title">Welcome back, {{ sellerName || 'Seller' }}!</h1>
+      <p class="welcome-desc">Manage your inventory, list new products, and track catalog updates from your seller dashboard.</p>
+    </div>
+    <div class="banner-visual">
+      <span class="banner-emoji">🚀</span>
+    </div>
+  </div>
+
+  <!-- Quick Action Cards -->
+  <div class="dashboard-grid">
+    <!-- Add Product Card -->
+    <div class="action-card">
+      <div class="card-icon-container add-icon">
+        <span class="card-icon">➕</span>
+      </div>
+      <h3 class="card-title">Add New Product</h3>
+      <p class="card-desc">List a new product in the store. Set the price, category, colors, details, and link a high-quality product image.</p>
+      <a routerLink="/seller-addProduct" class="btn-dashboard btn-add">List Product</a>
+    </div>
+
+    <!-- Manage Inventory Card -->
+    <div class="action-card">
+      <div class="card-icon-container manage-icon">
+        <span class="card-icon">📦</span>
+      </div>
+      <h3 class="card-title">Manage Inventory</h3>
+      <p class="card-desc">View all your listed products in a catalog table. Easily modify details, edit specifications, or delete items instantly.</p>
+      <a routerLink="/seller-allProduct" class="btn-dashboard btn-manage">Manage Products</a>
+    </div>
+  </div>
+
+  <!-- Seller Guidelines Section -->
+  <div class="guidelines-section">
+    <h3 class="section-title">Seller Guidelines & Instructions</h3>
+    <div class="steps-container">
+      <div class="step-item">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>List Product</h4>
+          <p>Click "List Product" to open the form. Provide exact names, category, color, description, and an image URL.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Update or Delete</h4>
+          <p>Monitor your items inside the inventory table. Make updates or delete items when out of stock.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>Optimize Catalog</h4>
+          <p>Use high-quality product images and detailed specifications to increase seller conversions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

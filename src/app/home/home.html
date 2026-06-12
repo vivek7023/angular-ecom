@@ -1,0 +1,80 @@
+<div class="home-container">
+  <!-- Welcome Banner -->
+  <div class="welcome-banner">
+    <h1 class="welcome-title">Welcome, <span class="highlight">{{ userName || 'Guest' }}</span></h1>
+    <p class="welcome-subtitle">Explore our latest trends and popular items today</p>
+  </div>
+
+  <!-- Popular Products Slider -->
+  <div class="slider-wrapper">
+    @if (popularProducts.length > 0) {
+      <div class="slider-container" (mouseenter)="stopSlideShow()" (mouseleave)="startSlideShow()">
+        
+        <!-- Slide Item -->
+        @for (product of popularProducts; track product.id; let i = $index) {
+          <div class="slide-item" [class.active]="i === currentSlide" (click)="sendOnDetailPage(product.id)">
+            <div class="slide-image-container">
+              <img [src]="product.pimageurl" [alt]="product.pname" class="slide-image" onerror="this.src='favicon.ico'">
+            </div>
+            <div class="slide-content">
+              <span class="slide-tag">Popular Pick</span>
+              <h1 class="slide-title">{{product.pname}}</h1>
+              <p class="slide-description">{{product.pdescription}}</p>
+              <div class="slide-price">₹{{product.pprice}}</div>
+              <a routerLink="/seller" class="slide-btn">Shop Now</a>
+            </div>
+          </div>
+        }
+        
+        <!-- Slider Arrows -->
+        <button class="slider-arrow prev" (click)="prevSlide()">❮</button>
+        <button class="slider-arrow next" (click)="nextSlide()">❯</button>
+        
+        <!-- Slider Dots -->
+        <div class="slider-dots">
+          @for (product of popularProducts; track product.id; let i = $index) {
+            <span 
+              class="slider-dot" 
+              [class.active]="i === currentSlide"
+              (click)="setSlide(i)"
+            ></span>
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Trendy Products Section -->
+  <section class="trendy-section">
+    <div class="section-header">
+      <h2 class="section-title">Trendy Products</h2>
+      <p class="section-subtitle">Handpicked selection of trending items</p>
+    </div>
+
+    <div class="trendy-products">
+      @for(item of trendyProducts; track item.id){
+        <div class="product-card" (click)="sendOnDetailPage(item.id)">
+          <div class="card-image-wrapper">
+            <img [src]="item.pimageurl" [alt]="item.pname" class="card-image" onerror="this.src='favicon.ico'">
+            <span class="card-badge">{{item.pcategory}}</span>
+          </div>
+
+          <div class="product-details">
+            <div class="card-meta">
+              <span class="card-color">{{item.pcolor}}</span>
+            </div>
+            <h4 class="card-title">{{item.pname}}</h4>
+            <p class="card-desc">{{item.pdescription}}</p>
+          </div>
+
+          <div class="product-footer">
+            <span class="card-price">₹{{item.pprice}}</span>
+            <div class="footer-actions">
+              <p class="btn-action btn-details">Details</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+</div>

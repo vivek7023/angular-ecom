@@ -1,0 +1,74 @@
+<header class="app-header">
+  <div class="header-container">
+    <!-- Logo -->
+    <a routerLink="/" class="logo-link">
+      <span class="logo-icon">✨</span>
+      <span class="logo-text">eCom</span>
+    </a>
+
+    <!-- Normal User Navigation / Search -->
+    <ng-container *ngIf="!isSellerMenu">
+      <div class="search-container">
+        <div class="search-bar">
+          <input
+            type="text"
+            placeholder="Search products..."
+            class="search-input"
+            #searchInput
+            (keyup)="searchProduct(searchInput.value)"
+          >
+          <button (click)="submitSearch(searchInput.value)" class="search-btn">
+            <span class="search-icon">🔍</span>
+          </button>
+        </div>
+
+        @if(searchResult.length){
+          <div class="search-result">
+            <ul class="search-result-list">
+              @for(item of searchResult; track item.id){
+                <li class="search-result-item" (click)="sendOnDetailPage(item.id)">
+                  <a routerLink="/product-detail/{{item.id}}">
+                  <span class="search-result-name">{{item.pname}}</span>
+                  <span class="search-result-category">{{item.pcategory}}</span>
+                  </a>
+                </li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+
+      <nav class="nav-links">
+        <a routerLink="/" class="nav-link">Home</a>
+        <a routerLink="/seller" class="nav-link">Seller Portal</a>
+        
+        <ng-container *ngIf="isUserLoggedIn; else guestBlock">
+          <span class="user-welcome">Welcome, {{ userName }}</span>
+          <button (click)="logoutUser()" class="btn-logout">Logout</button>
+        </ng-container>
+        <ng-template #guestBlock>
+          <a routerLink="/user-auth" class="nav-link">Login/Sign Up</a>
+        </ng-template>
+
+        <a routerLink="cart-page" class="nav-link cart-link">
+          <span class="cart-icon">🛒</span>
+          <span>Cart({{cartItems}})</span>
+        </a>
+      </nav>
+    </ng-container>
+
+    <!-- Seller Navigation / Welcome -->
+    <ng-container *ngIf="isSellerMenu">
+      <div class="seller-badge">
+        <span class="badge-dot"></span>
+        <span class="badge-text">Welcome, {{ sellerName || 'Seller' }}</span>
+      </div>
+
+      <nav class="nav-links">
+        <a routerLink="/seller-addProduct" class="nav-link">Add Product</a>
+        <a routerLink="/seller-allProduct" class="nav-link">Manage Products</a>
+        <button (click)="logoutSeller()" class="btn-logout">Logout</button>
+      </nav>
+    </ng-container>
+  </div>
+</header>

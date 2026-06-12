@@ -1,0 +1,62 @@
+<div class="search-page-container">
+  <!-- Search Results Header -->
+  <div class="search-header">
+    <div class="search-title-section">
+      <h1 class="search-page-title">Search Results</h1>
+      <p class="search-subtitle">
+        @if (query) {
+          Showing results for <span class="highlight">"{{query}}"</span>
+        } @else {
+          Showing all products
+        }
+      </p>
+    </div>
+    <div class="results-count">
+      <span class="count-number">{{products.length}}</span> {{products.length === 1 ? 'product' : 'products'}} found
+    </div>
+  </div>
+
+  @if (products.length > 0) {
+    <!-- Search Results Grid -->
+    <div class="search-grid">
+      @for(product of products; track product.id){
+        <div class="product-card" (click)="sendOnDetailPage(product.id)">
+          <div class="card-image-wrapper">
+            <img [src]="product.pimageurl" [alt]="product.pname" class="card-image" onerror="this.src='favicon.ico'">
+            <span class="card-badge">{{product.pcategory}}</span>
+          </div>
+
+          <div class="product-details">
+            <div class="card-meta">
+              <span class="card-color-dot" [style.background-color]="product.pcolor"></span>
+              <span class="card-color-name">{{product.pcolor}}</span>
+            </div>
+            <h3 class="card-title">{{product.pname}}</h3>
+            <p class="card-desc">{{product.pdescription}}</p>
+          </div>
+
+          <div class="product-footer">
+            <span class="card-price">₹{{product.pprice}}</span>
+            <div class="footer-actions">
+              <a routerLink="/product-detail/{{product.id}}" class="btn-action btn-details">Details</a>
+              <a href="#" class="btn-action btn-cart">🛒 Add</a>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <!-- No Results Empty State -->
+    <div class="no-results-card">
+      <div class="empty-icon-container">
+        <span class="empty-icon">🔍</span>
+      </div>
+      <h2 class="empty-title">No matching products found</h2>
+      <p class="empty-desc">We couldn't find any products matching your search term. Try checking for spelling errors, using more general terms, or browse our latest listings instead.</p>
+      <div class="empty-actions">
+        <a routerLink="/" class="btn-primary">Browse Catalog</a>
+        <a href="/" class="btn-secondary">Clear Search</a>
+      </div>
+    </div>
+  }
+</div>

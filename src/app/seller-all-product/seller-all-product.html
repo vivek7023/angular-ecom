@@ -1,0 +1,60 @@
+<div class="page-container">
+  <div class="page-card">
+    <div class="card-header">
+      <div>
+        <h2 class="page-title">Manage Products</h2>
+        <p class="page-subtitle">View, edit, and delete your listed catalog products</p>
+      </div>
+      <a routerLink="/seller-addProduct" class="btn-add">
+        <span class="btn-icon">+</span> Add New Product
+      </a>
+    </div>
+
+    <div class="table-responsive">
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Color</th>
+            <th>Description</th>
+            <th class="text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>
+              <div class="product-cell">
+                <img [src]="product.pimageurl" [alt]="product.pname" class="product-image" onerror="this.src='broken.png'">
+                <span class="product-name">{{product.pname}}</span>
+              </div>
+            </td>
+            <td class="price-cell">₹{{product.pprice}}</td>
+            <td>
+              <span class="badge category-badge">{{product.pcategory}}</span>
+            </td>
+            <td>
+              <span class="badge color-badge">{{product.pcolor}}</span>
+            </td>
+            <td class="desc-cell">{{product.pdescription}}</td>
+            <td>
+              <div class="actions-cell">
+                <a routerLink="/seller-update-product/{{product.id}}" class="btn-action btn-edit">Edit</a>
+                <button (click)="deleteProduct(product.id)" class="btn-action btn-delete">Delete</button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="products.length === 0">
+            <td colspan="7" class="empty-state">
+              <span class="empty-icon">📦</span>
+              <p>No products found in your inventory.</p>
+              <a routerLink="/seller-addProduct" class="btn-primary-inline">Add your first product</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

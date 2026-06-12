@@ -1,0 +1,102 @@
+<div class="cart-container">
+  @if (cartData.length > 0) {
+    <div class="cart-header-section">
+      <h1 class="cart-title">Shopping Cart</h1>
+      <span class="items-count">{{ cartData.length }} {{ cartData.length === 1 ? 'item' : 'items' }}</span>
+    </div>
+
+    <div class="cart-grid">
+      <!-- Cart Items Section -->
+      <div class="cart-items-column">
+        @for (item of cartData; track item.id) {
+          <div class="cart-item-card">
+            <div class="cart-item-image-wrapper">
+              <img [src]="item.pimageurl" [alt]="item.pname" class="cart-item-image" onerror="this.src='favicon.ico'">
+            </div>
+            
+            <div class="cart-item-details">
+              <div class="item-header">
+                <h2 class="item-name">{{ item.pname }}</h2>
+                <span class="item-category">{{ item.pcategory }}</span>
+              </div>
+              
+              <div class="item-meta">
+                <span class="meta-dot" [style.background-color]="item.pcolor"></span>
+                <span class="meta-label">{{ item.pcolor }}</span>
+              </div>
+
+              <div class="item-pricing">
+                <span class="price-lbl">Unit Price:</span>
+                <span class="item-price">₹{{ item.pprice }}</span>
+              </div>
+            </div>
+
+            <div class="cart-item-actions">
+              <button (click)="removeFromCart(item.id)" class="btn-remove" title="Remove Item">
+                <span class="remove-icon">🗑️</span> Remove
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Order Summary Card -->
+      <div class="cart-summary-column">
+        <div class="summary-card">
+          <h2 class="summary-title">Order Summary</h2>
+          
+          <div class="summary-divider"></div>
+          
+          <div class="summary-row">
+            <span class="row-label">Subtotal</span>
+            <span class="row-value">₹{{ priceSummary.price }}</span>
+          </div>
+          
+          <div class="summary-row discount-row">
+            <span class="row-label">Discount (10%)</span>
+            <span class="row-value">-₹{{ priceSummary.discount }}</span>
+          </div>
+          
+          <div class="summary-row">
+            <span class="row-label">GST Tax (10%)</span>
+            <span class="row-value">+₹{{ priceSummary.tax }}</span>
+          </div>
+
+          <div class="summary-row">
+            <span class="row-label">Delivery Charges</span>
+            <span class="row-value" [class.free-delivery]="priceSummary.delivery === 0">
+              {{ priceSummary.delivery === 0 ? 'FREE' : '₹' + priceSummary.delivery }}
+            </span>
+          </div>
+          
+          <div class="summary-divider"></div>
+          
+          <div class="summary-row total-row">
+            <span class="total-label">Total Amount</span>
+            <span class="total-value">₹{{ priceSummary.total }}</span>
+          </div>
+
+          <button (click)="checkout()" class="btn-checkout">
+            Proceed to Checkout
+          </button>
+
+          <div class="summary-footer">
+            <span class="footer-icon">🔒</span> Secure Checkout Guarantee
+          </div>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <!-- Empty Cart Template -->
+    <div class="empty-cart-card">
+      <div class="empty-cart-icon">🛒</div>
+      <h2 class="empty-cart-title">Your Cart is Empty</h2>
+      <p class="empty-cart-text">
+        Looks like you haven't added any products to your shopping cart yet. Explore our curated catalog of premium items today.
+      </p>
+      <a routerLink="/" class="btn-continue-shop">
+        Start Shopping
+      </a>
+    </div>
+  }
+</div>

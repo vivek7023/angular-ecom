@@ -1,0 +1,54 @@
+<div class="product-form-container">
+  <div class="product-form-card">
+    <h2 class="form-title">Add New Product</h2>
+    <p class="form-subtitle">Fill in the details below to add a new product to your store catalog</p>
+    
+    <form #addProductForm="ngForm" (ngSubmit)="addProduct(addProductForm.value)" class="app-form" noValidate>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="pname" class="form-label">Product Name</label>
+          <input type="text" id="pname" name="pname" ngModel placeholder="e.g., iPhone 15 Pro" required #pnameRef="ngModel" class="form-input" [class.input-error]="pnameRef.invalid && (pnameRef.dirty || pnameRef.touched)">
+          <span class="error-msg" *ngIf="pnameRef.invalid && (pnameRef.dirty || pnameRef.touched)">Product name is required.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="pprice" class="form-label">Price (INR)</label>
+          <input type="number" id="pprice" name="pprice" ngModel placeholder="e.g., 129900" required min="1" #ppriceRef="ngModel" class="form-input" [class.input-error]="ppriceRef.invalid && (ppriceRef.dirty || ppriceRef.touched)">
+          <div class="error-msg" *ngIf="ppriceRef.invalid && (ppriceRef.dirty || ppriceRef.touched)">
+            <span *ngIf="ppriceRef.errors?.['required']">Price is required.</span>
+            <span *ngIf="ppriceRef.errors?.['min']">Price must be greater than 0.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="pcategory" class="form-label">Category</label>
+          <input type="text" id="pcategory" name="pcategory" ngModel placeholder="e.g., Electronics" required #pcategoryRef="ngModel" class="form-input" [class.input-error]="pcategoryRef.invalid && (pcategoryRef.dirty || pcategoryRef.touched)">
+          <span class="error-msg" *ngIf="pcategoryRef.invalid && (pcategoryRef.dirty || pcategoryRef.touched)">Category is required.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="pcolor" class="form-label">Color</label>
+          <input type="text" id="pcolor" name="pcolor" ngModel placeholder="e.g., Titanium Grey" required #pcolorRef="ngModel" class="form-input" [class.input-error]="pcolorRef.invalid && (pcolorRef.dirty || pcolorRef.touched)">
+          <span class="error-msg" *ngIf="pcolorRef.invalid && (pcolorRef.dirty || pcolorRef.touched)">Color is required.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="pdescription" class="form-label">Product Description</label>
+        <textarea id="pdescription" name="pdescription" ngModel placeholder="Describe the key features, specs, and condition..." required #pdescriptionRef="ngModel" class="form-textarea" [class.input-error]="pdescriptionRef.invalid && (pdescriptionRef.dirty || pdescriptionRef.touched)" rows="3"></textarea>
+        <span class="error-msg" *ngIf="pdescriptionRef.invalid && (pdescriptionRef.dirty || pdescriptionRef.touched)">Description is required.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="pimageurl" class="form-label">Image URL</label>
+        <input type="text" id="pimageurl" name="pimageurl" ngModel placeholder="e.g., https://example.com/images/iphone.jpg" required pattern="https?://.+" #pimageurlRef="ngModel" class="form-input" [class.input-error]="pimageurlRef.invalid && (pimageurlRef.dirty || pimageurlRef.touched)">
+        <div class="error-msg" *ngIf="pimageurlRef.invalid && (pimageurlRef.dirty || pimageurlRef.touched)">
+          <span *ngIf="pimageurlRef.errors?.['required']">Image URL is required.</span>
+          <span *ngIf="pimageurlRef.errors?.['pattern']">Please enter a valid HTTP/HTTPS image URL.</span>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="!addProductForm.valid" class="btn-primary">Add Product to Store</button>
+    </form>
+  </div>
+</div>

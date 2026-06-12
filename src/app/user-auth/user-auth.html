@@ -1,0 +1,96 @@
+<div class="form-container">
+  <div class="form-card">
+    <!-- Error Message Alert -->
+    <div *ngIf="authError" class="auth-error-alert">
+      <span class="error-icon">⚠️</span>
+      <p class="error-text">{{authError}}</p>
+    </div>
+
+    <!-- User Sign Up Section -->
+    <div *ngIf="isNewUser">
+      <h2 class="form-title">User Signup</h2>
+      <p class="form-subtitle">Create your shopper account to start buying products</p>
+      
+      <form #userSignUp="ngForm" (ngSubmit)="signUp(userSignUp.value)" class="app-form" noValidate>
+        <div class="form-group">
+          <label for="signUpName" class="form-label">Full Name</label>
+          <input type="text" id="signUpName" placeholder="John Doe" ngModel name="name" required #signUpNameRef="ngModel" class="form-input" [class.input-error]="signUpNameRef.invalid && (signUpNameRef.dirty || signUpNameRef.touched)"/>
+          <span class="error-msg" *ngIf="signUpNameRef.invalid && (signUpNameRef.dirty || signUpNameRef.touched)">Name is required.</span>
+        </div>
+        
+        <div class="form-group">
+          <label for="signUpEmail" class="form-label">Email Address</label>
+          <input type="email" id="signUpEmail" placeholder="john@example.com" ngModel name="email" required email #signUpEmailRef="ngModel" class="form-input" [class.input-error]="signUpEmailRef.invalid && (signUpEmailRef.dirty || signUpEmailRef.touched)"/>
+          <div class="error-msg" *ngIf="signUpEmailRef.invalid && (signUpEmailRef.dirty || signUpEmailRef.touched)">
+            <span *ngIf="signUpEmailRef.errors?.['required']">Email is required.</span>
+            <span *ngIf="signUpEmailRef.errors?.['email']">Please enter a valid email address.</span>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="signUpPassword" class="form-label">Password</label>
+          <input type="password" id="signUpPassword" placeholder="••••••••" ngModel name="password" required minlength="6" #signUpPasswordRef="ngModel" class="form-input" [class.input-error]="signUpPasswordRef.invalid && (signUpPasswordRef.dirty || signUpPasswordRef.touched)"/>
+          <div class="error-msg" *ngIf="signUpPasswordRef.invalid && (signUpPasswordRef.dirty || signUpPasswordRef.touched)">
+            <span *ngIf="signUpPasswordRef.errors?.['required']">Password is required.</span>
+            <span *ngIf="signUpPasswordRef.errors?.['minlength']">Password must be at least 6 characters.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="signUpAddress" class="form-label">Delivery Address</label>
+          <input type="text" id="signUpAddress" placeholder="123 Main St, New York" ngModel name="address" required minlength="5" #signUpAddressRef="ngModel" class="form-input" [class.input-error]="signUpAddressRef.invalid && (signUpAddressRef.dirty || signUpAddressRef.touched)"/>
+          <div class="error-msg" *ngIf="signUpAddressRef.invalid && (signUpAddressRef.dirty || signUpAddressRef.touched)">
+            <span *ngIf="signUpAddressRef.errors?.['required']">Address is required.</span>
+            <span *ngIf="signUpAddressRef.errors?.['minlength']">Address must be at least 5 characters.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="signUpPhone" class="form-label">Phone Number</label>
+          <input type="tel" id="signUpPhone" placeholder="10-digit number" ngModel name="phone" required pattern="^[0-9]{10}$" #signUpPhoneRef="ngModel" class="form-input" [class.input-error]="signUpPhoneRef.invalid && (signUpPhoneRef.dirty || signUpPhoneRef.touched)"/>
+          <div class="error-msg" *ngIf="signUpPhoneRef.invalid && (signUpPhoneRef.dirty || signUpPhoneRef.touched)">
+            <span *ngIf="signUpPhoneRef.errors?.['required']">Phone number is required.</span>
+            <span *ngIf="signUpPhoneRef.errors?.['pattern']">Please enter a valid 10-digit phone number.</span>
+          </div>
+        </div>
+        
+        <button type="submit" [disabled]="!userSignUp.valid" class="btn-primary">Create Account</button>
+        
+        <div class="form-footer">
+          <span>Already have an account?</span>
+          <button type="button" class="btn-link" (click)="isNewUser = !isNewUser">Log In Here</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- User Login Section -->
+    <div *ngIf="!isNewUser">
+      <h2 class="form-title">User Login</h2>
+      <p class="form-subtitle">Welcome back! Sign in to continue shopping</p>
+      
+      <form #userLogin="ngForm" (ngSubmit)="login(userLogin.value)" class="app-form" noValidate>
+        <div class="form-group">
+          <label for="loginEmail" class="form-label">Email Address</label>
+          <input type="email" id="loginEmail" placeholder="john@example.com" ngModel name="email" required email #loginEmailRef="ngModel" class="form-input" [class.input-error]="loginEmailRef.invalid && (loginEmailRef.dirty || loginEmailRef.touched)"/>
+          <div class="error-msg" *ngIf="loginEmailRef.invalid && (loginEmailRef.dirty || loginEmailRef.touched)">
+            <span *ngIf="loginEmailRef.errors?.['required']">Email is required.</span>
+            <span *ngIf="loginEmailRef.errors?.['email']">Please enter a valid email address.</span>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="loginPassword" class="form-label">Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" ngModel name="password" required #loginPasswordRef="ngModel" class="form-input" [class.input-error]="loginPasswordRef.invalid && (loginPasswordRef.dirty || loginPasswordRef.touched)"/>
+          <span class="error-msg" *ngIf="loginPasswordRef.invalid && (loginPasswordRef.dirty || loginPasswordRef.touched)">Password is required.</span>
+        </div>
+        
+        <button type="submit" [disabled]="!userLogin.valid" class="btn-primary">Sign In</button>
+        
+        <div class="form-footer">
+          <span>New to eCom?</span>
+          <button type="button" class="btn-link" (click)="isNewUser = !isNewUser">Register Here</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
