@@ -14,13 +14,13 @@
       <form #userSignUp="ngForm" (ngSubmit)="signUp(userSignUp.value)" class="app-form" noValidate>
         <div class="form-group">
           <label for="signUpName" class="form-label">Full Name</label>
-          <input type="text" id="signUpName" placeholder="John Doe" ngModel name="name" required #signUpNameRef="ngModel" class="form-input" [class.input-error]="signUpNameRef.invalid && (signUpNameRef.dirty || signUpNameRef.touched)"/>
+          <input type="text" id="signUpName" placeholder="e.g. vivek chothani" ngModel name="name" required #signUpNameRef="ngModel" class="form-input" [class.input-error]="signUpNameRef.invalid && (signUpNameRef.dirty || signUpNameRef.touched)"/>
           <span class="error-msg" *ngIf="signUpNameRef.invalid && (signUpNameRef.dirty || signUpNameRef.touched)">Name is required.</span>
         </div>
         
         <div class="form-group">
           <label for="signUpEmail" class="form-label">Email Address</label>
-          <input type="email" id="signUpEmail" placeholder="john@example.com" ngModel name="email" required email #signUpEmailRef="ngModel" class="form-input" [class.input-error]="signUpEmailRef.invalid && (signUpEmailRef.dirty || signUpEmailRef.touched)"/>
+          <input type="email" id="signUpEmail" placeholder="vivek@example.com" ngModel name="email" required email #signUpEmailRef="ngModel" class="form-input" [class.input-error]="signUpEmailRef.invalid && (signUpEmailRef.dirty || signUpEmailRef.touched)"/>
           <div class="error-msg" *ngIf="signUpEmailRef.invalid && (signUpEmailRef.dirty || signUpEmailRef.touched)">
             <span *ngIf="signUpEmailRef.errors?.['required']">Email is required.</span>
             <span *ngIf="signUpEmailRef.errors?.['email']">Please enter a valid email address.</span>
@@ -38,7 +38,7 @@
 
         <div class="form-group">
           <label for="signUpAddress" class="form-label">Delivery Address</label>
-          <input type="text" id="signUpAddress" placeholder="123 Main St, New York" ngModel name="address" required minlength="5" #signUpAddressRef="ngModel" class="form-input" [class.input-error]="signUpAddressRef.invalid && (signUpAddressRef.dirty || signUpAddressRef.touched)"/>
+          <input type="text" id="signUpAddress" placeholder="shyamal ahmedabad,Gujarat" ngModel name="address" required minlength="5" #signUpAddressRef="ngModel" class="form-input" [class.input-error]="signUpAddressRef.invalid && (signUpAddressRef.dirty || signUpAddressRef.touched)"/>
           <div class="error-msg" *ngIf="signUpAddressRef.invalid && (signUpAddressRef.dirty || signUpAddressRef.touched)">
             <span *ngIf="signUpAddressRef.errors?.['required']">Address is required.</span>
             <span *ngIf="signUpAddressRef.errors?.['minlength']">Address must be at least 5 characters.</span>
@@ -71,7 +71,7 @@
       <form #userLogin="ngForm" (ngSubmit)="login(userLogin.value)" class="app-form" noValidate>
         <div class="form-group">
           <label for="loginEmail" class="form-label">Email Address</label>
-          <input type="email" id="loginEmail" placeholder="john@example.com" ngModel name="email" required email #loginEmailRef="ngModel" class="form-input" [class.input-error]="loginEmailRef.invalid && (loginEmailRef.dirty || loginEmailRef.touched)"/>
+          <input type="email" id="loginEmail" placeholder="vivek@example.com" ngModel name="email" required email #loginEmailRef="ngModel" class="form-input" [class.input-error]="loginEmailRef.invalid && (loginEmailRef.dirty || loginEmailRef.touched)"/>
           <div class="error-msg" *ngIf="loginEmailRef.invalid && (loginEmailRef.dirty || loginEmailRef.touched)">
             <span *ngIf="loginEmailRef.errors?.['required']">Email is required.</span>
             <span *ngIf="loginEmailRef.errors?.['email']">Please enter a valid email address.</span>
