@@ -9,12 +9,12 @@ export class Userservices {
   private http = inject(HttpClient);
 
   userSignUp(data: userType) {
-    return this.http.post<userType>('http://localhost:3000/users', data);
+    return this.http.post<userType>('https://angular-ecom-rm6f.onrender.com/users', data);
   }
 
   userLogin(data: any) {
     return this.http.get<userType[]>(
-      `http://localhost:3000/users?email=${data.email}&password=${data.password}`
+      `https://angular-ecom-rm6f.onrender.com/users?email=${data.email}&password=${data.password}`
     );
   }
 }

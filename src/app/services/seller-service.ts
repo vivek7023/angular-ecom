@@ -10,11 +10,11 @@ export class SellerService {
 
   }
     userSignUp(data:SingUp){
-        return this.http.post('http://localhost:3000/seller',data)
+        return this.http.post('https://angular-ecom-rm6f.onrender.com/seller',data)
     }
 
     sellerLogin(data:sellerLogin){
-      return this.http.get(`http://localhost:3000/seller?email=${data.email}&password=${data.password}`)
+      return this.http.get(`https://angular-ecom-rm6f.onrender.com/seller?email=${data.email}&password=${data.password}`)
     }
 
 
