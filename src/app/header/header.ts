@@ -21,7 +21,6 @@ export class Header {
   constructor(private router:Router,private ps :AddProductService, private cdr: ChangeDetectorRef){
 
 
-          // Initial cart count check for users (if already logged in)
           let user = localStorage.getItem('user');
           if (user) {
             let userId = JSON.parse(user).id;
@@ -31,7 +30,6 @@ export class Header {
             });
           }
 
-          // Dynamic cart updates subscription
           this.ps.cartData.subscribe((items) => {
             this.cartItems = items.length;
             this.cdr.detectChanges();
@@ -55,7 +53,6 @@ export class Header {
                 this.userName = userData.name;
                 this.isUserLoggedIn = true;
 
-                // Sync/load count for logged in user
                 this.ps.getCartList(userData.id).subscribe((result) => {
                   this.cartItems = result.length;
                   this.cdr.detectChanges();
@@ -112,7 +109,6 @@ hideSearch(){
 
 submitSearch(val:string){
   if(val){
-    // this.router.navigate([`/search/${val}`])
     this.router.navigate(['/search',val])
   }
 }

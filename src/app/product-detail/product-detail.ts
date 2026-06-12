@@ -34,7 +34,6 @@ export class ProductDetail implements OnInit {
             this.product = result;
             
 
-            // Check logged in user database cart
             let user = localStorage.getItem('user');
             if (user) {
               let userId = JSON.parse(user).id;
@@ -73,7 +72,7 @@ export class ProductDetail implements OnInit {
         productId: productWithQty.id,
         userId
       };
-      delete cartData.id; // DB auto-generates id
+      delete cartData.id;
       this.ps.addToCart(cartData).subscribe({
         next: (result: any) => {
           if (result) {

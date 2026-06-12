@@ -6,7 +6,6 @@
     </div>
 
     <div class="cart-grid">
-      <!-- Cart Items Section -->
       <div class="cart-items-column">
         @for (item of cartData; track item.id) {
           <div class="cart-item-card">
@@ -39,8 +38,6 @@
           </div>
         }
       </div>
-
-      <!-- Order Summary Card -->
       <div class="cart-summary-column">
         <div class="summary-card">
           <h2 class="summary-title">Order Summary</h2>
@@ -87,7 +84,6 @@
       </div>
     </div>
   } @else {
-    <!-- Empty Cart Template -->
     <div class="empty-cart-card">
       <div class="empty-cart-icon">🛒</div>
       <h2 class="empty-cart-title">Your Cart is Empty</h2>

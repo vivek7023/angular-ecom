@@ -12,8 +12,6 @@
   max-width: 1100px;
   margin: 0 auto;
 }
-
-/* Header styling */
 .cart-header-section {
   display: flex;
   align-items: baseline;
@@ -37,16 +35,12 @@
   padding: 4px 12px;
   border-radius: 9999px;
 }
-
-/* Responsive Grid layout */
 .cart-grid {
   display: grid;
   grid-template-columns: 1fr 360px;
   gap: 32px;
   align-items: start;
 }
-
-/* Left Column: Cart Items */
 .cart-items-column {
   display: flex;
   flex-direction: column;
@@ -192,8 +186,6 @@
 .btn-remove:active {
   transform: scale(1.0);
 }
-
-/* Right Column: Order Summary Card */
 .cart-summary-column {
   position: sticky;
   top: 100px;
@@ -295,8 +287,6 @@
   color: #94a3b8;
   margin-top: 20px;
 }
-
-/* Empty Cart View */
 .empty-cart-card {
   background: #ffffff;
   border-radius: 24px;
@@ -350,8 +340,6 @@
   50% { transform: translateY(-10px); }
   100% { transform: translateY(0px); }
 }
-
-/* Responsive queries */
 @media (max-width: 900px) {
   .cart-grid {
     grid-template-columns: 1fr;

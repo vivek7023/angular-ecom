@@ -55,9 +55,9 @@ export class CartPage implements OnInit {
     });
 
     this.priceSummary.price = price;
-    this.priceSummary.discount = Math.round(price / 10); // 10% discount
-    this.priceSummary.tax = Math.round(price / 10); // 10% tax
-    this.priceSummary.delivery = price > 0 ? (price > 1000 ? 0 : 100) : 0; // Free delivery above 1000
+    this.priceSummary.discount = Math.round(price / 10);
+    this.priceSummary.tax = Math.round(price / 10);
+    this.priceSummary.delivery = price > 0 ? (price > 1000 ? 0 : 100) : 0;
     this.priceSummary.total = price - this.priceSummary.discount + this.priceSummary.tax + this.priceSummary.delivery;
   }
 
@@ -65,10 +65,7 @@ export class CartPage implements OnInit {
     if (cartId) {
       this.ps.removeFromCart(cartId).subscribe((result) => {
         if (result) {
-          // Re-load the cart from DB
           this.loadCart();
-          
-          // Sync header count
           let user = localStorage.getItem('user');
           if (user) {
             let userId = JSON.parse(user).id;
